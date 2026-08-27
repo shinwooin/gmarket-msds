@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,6 +9,9 @@
 <title>Gmarket MSDS</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -16,176 +21,238 @@ body {
 }
 
 header {
-    background: white;
-    padding: 35px 20px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 34px 20px 28px;
     text-align: center;
-    border-bottom: 1px solid #ddd;
 }
 
 header h1 {
     margin: 0;
     font-size: 30px;
+    font-weight: 800;
 }
 
 header p {
-    margin-top: 10px;
+    margin: 10px 0 0;
     color: #666;
+    font-size: 15px;
 }
 
 .container {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 0 20px;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 18px 60px;
+}
+
+.search-wrap {
+    position: relative;
 }
 
 .search-box {
     width: 100%;
-    box-sizing: border-box;
-    padding: 17px;
+    height: 58px;
+    padding: 0 18px;
+    border: 2px solid #00c73c;
+    border-radius: 12px;
+    background: #fff;
     font-size: 17px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-bottom: 25px;
+    outline: none;
 }
 
-.result-count {
-    margin-bottom: 15px;
-    color: #666;
+.search-box:focus {
+    box-shadow: 0 0 0 3px rgba(0, 199, 60, 0.10);
+}
+
+.info {
+    margin: 15px 3px 20px;
+    font-size: 14px;
+    color: #777;
+}
+
+.guide {
+    background: #fff;
+    padding: 35px 20px;
+    border-radius: 12px;
+    text-align: center;
+    color: #777;
+    margin-top: 12px;
+}
+
+.guide strong {
+    display: block;
+    color: #333;
+    font-size: 17px;
+    margin-bottom: 7px;
 }
 
 .msds-item {
-    background: white;
-    padding: 22px;
-    margin-bottom: 12px;
+    display: none;
+    background: #fff;
     border-radius: 12px;
-    box-shadow: 0 2px 7px rgba(0,0,0,0.06);
+    padding: 20px;
+    margin-bottom: 12px;
+    border: 1px solid #ececec;
 }
 
-.msds-item h3 {
-    margin: 0 0 8px 0;
+.msds-title {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.45;
+    margin-bottom: 8px;
+    word-break: keep-all;
 }
 
-.company {
-    color: #777;
+.folder {
+    font-size: 13px;
+    color: #888;
     margin-bottom: 15px;
 }
 
-.open-btn {
+.file-type {
     display: inline-block;
+    font-size: 11px;
+    color: #777;
+    background: #f2f3f5;
+    border-radius: 4px;
+    padding: 4px 7px;
+    margin-bottom: 13px;
+}
+
+.open-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
     background: #00c73c;
-    color: white;
-    padding: 11px 18px;
-    border-radius: 7px;
+    color: #fff;
     text-decoration: none;
-    font-weight: bold;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-weight: 700;
+}
+
+.open-btn:hover {
+    background: #00b638;
 }
 
 .no-result {
     display: none;
+    background: #fff;
+    padding: 40px 20px;
+    border-radius: 12px;
     text-align: center;
-    padding: 40px;
     color: #777;
 }
 
+.notice {
+    margin-top: 25px;
+    padding: 15px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #777;
+    background: #eceef1;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 26px;
+    }
+
+    .container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}
 </style>
+
 </head>
 
 <body>
 
 <header>
     <h1>Gmarket MSDS</h1>
-    <p>물질안전보건자료(MSDS)를 검색하고 열람할 수 있습니다.</p>
+    <p>물질안전보건자료(MSDS) 열람</p>
 </header>
 
 <div class="container">
 
-<input
-    type="text"
-    id="searchInput"
-    class="search-box"
-    placeholder="제품명 또는 제조사를 검색하세요"
->
-
-<div class="result-count" id="resultCount"></div>
-
-<!-- 록타이트 순간접착제 -->
-<div class="msds-item"
-     data-search="록타이트 헨켈 순간접착제 접착제 40120g">
-
-    <h3>록타이트 헨켈 순간접착제 40120g</h3>
-
-    <div class="company">
-        헨켈
+    <div class="search-wrap">
+        <input
+            id="searchInput"
+            class="search-box"
+            type="search"
+            placeholder="제품명 또는 브랜드명을 검색하세요"
+            autocomplete="off">
     </div>
 
-    <a class="open-btn"
-       href="msds/[취급주의] [록타이트]헨켈순간 접착제 40120g.pdf"
-       target="_blank">
-        MSDS 열람
-    </a>
+    <div class="info" id="info"></div>
 
-</div>
-
-
-<!-- 오공 다용도 접착제 -->
-<div class="msds-item"
-     data-search="오공 라온공구 다용도 접착제 60ml">
-
-    <h3>오공 다용도 접착제 60ml</h3>
-
-    <div class="company">
-        오공
+    <div class="guide" id="guide">
+        <strong>찾으시는 제품명을 검색해 주세요.</strong>
+        제품명 일부만 입력해도 검색할 수 있습니다.
     </div>
 
-    <a class="open-btn"
-       href="msds/[취급주의] [오공]라온공구오공 다용도 접착제 60ml.pdf"
-       target="_blank">
-        MSDS 열람
-    </a>
 
-</div>
+{% assign msds_files = site.static_files | sort: "path" %}
+
+{% for file in msds_files %}
+
+    {% if file.path contains '/msds/' %}
+
+        {% assign ext = file.extname | downcase %}
+
+        {% if ext == '.pdf' or ext == '.xlsx' or ext == '.xls' or ext == '.html' or ext == '.htm' %}
+
+            {% assign display_name = file.basename | remove: '[취급주의]' | strip %}
+
+            {% assign parts = file.path | split: '/' %}
+            {% assign parent_index = parts.size | minus: 2 %}
+            {% assign parent_name = parts[parent_index] %}
+
+            <div
+                class="msds-item"
+                data-search="{{ file.basename | escape }} {{ file.path | escape }}">
+
+                <div class="msds-title">
+                    {{ display_name | escape }}
+                </div>
+
+                {% unless parent_name == 'msds' %}
+                <div class="folder">
+                    {{ parent_name | escape }}
+                </div>
+                {% endunless %}
+
+                <div class="file-type">
+                    {{ ext | remove: '.' | upcase }}
+                </div>
+
+                <a
+                    class="open-btn"
+                    href="{{ file.path | relative_url }}"
+                    target="_blank"
+                    rel="noopener">
+                    MSDS 열람
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    {% endif %}
+
+{% endfor %}
 
 
-<!-- 엑스핏 나노러스터 -->
-<div class="msds-item"
-     data-search="엑스핏 나노러스터 수분제거 동결방지제 300ml">
-
-    <h3>엑스핏 나노러스터 수분제거 동결방지제 300ML</h3>
-
-    <div class="company">
-        엑스핏
+    <div class="no-result" id="noResult">
+        검색 결과가 없습니다.<br>
+        제품명을 다시 확인해 주세요.
     </div>
 
-    <a class="open-btn"
-       href="msds/[취급주의][엑스핏]나노러스터 수분제거 동결방지제 300ML.pdf"
-       target="_blank">
-        MSDS 열람
-    </a>
-
-</div>
-
-
-<!-- 러버핏 -->
-<div class="msds-item"
-     data-search="고무보호제 스틱 러버핏 75ml">
-
-    <h3>고무보호제 스틱 러버핏 75ml</h3>
-
-    <div class="company">
-        고무보호제
+    <div class="notice">
+        제품명 또는 브랜드명의 일부를 입력하여 물질안전보건자료를 검색할 수 있습니다.
     </div>
-
-    <a class="open-btn"
-       href="msds/고무보호제 스틱 러버핏 75ml.PDF"
-       target="_blank">
-        MSDS 열람
-    </a>
-
-</div>
-
-<div class="no-result" id="noResult">
-    검색 결과가 없습니다.
-</div>
 
 </div>
 
@@ -193,24 +260,51 @@ header p {
 <script>
 
 const searchInput = document.getElementById("searchInput");
-const items = document.querySelectorAll(".msds-item");
-const resultCount = document.getElementById("resultCount");
+const items = Array.from(document.querySelectorAll(".msds-item"));
+const info = document.getElementById("info");
+const guide = document.getElementById("guide");
 const noResult = document.getElementById("noResult");
+
+
+function normalize(text) {
+    return text
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .replace(/[\[\]\(\)\-_]/g, "");
+}
+
 
 function searchMSDS() {
 
-    const keyword = searchInput.value
-        .toLowerCase()
-        .trim();
+    const keyword = normalize(searchInput.value.trim());
+
+    if (!keyword) {
+
+        items.forEach(item => {
+            item.style.display = "none";
+        });
+
+        guide.style.display = "block";
+        noResult.style.display = "none";
+
+        info.textContent =
+            "등록된 MSDS " + items.length + "건";
+
+        return;
+    }
+
+
+    guide.style.display = "none";
 
     let count = 0;
+
 
     items.forEach(item => {
 
         const searchText =
-            item.dataset.search.toLowerCase();
+            normalize(item.dataset.search);
 
-        if(searchText.includes(keyword)) {
+        if (searchText.includes(keyword)) {
 
             item.style.display = "block";
             count++;
@@ -223,10 +317,12 @@ function searchMSDS() {
 
     });
 
-    resultCount.textContent =
-        "검색결과 " + count + "건";
 
-    if(count === 0) {
+    info.textContent =
+        "검색 결과 " + count + "건";
+
+
+    if (count === 0) {
 
         noResult.style.display = "block";
 
@@ -238,10 +334,12 @@ function searchMSDS() {
 
 }
 
+
 searchInput.addEventListener(
     "input",
     searchMSDS
 );
+
 
 searchMSDS();
 
