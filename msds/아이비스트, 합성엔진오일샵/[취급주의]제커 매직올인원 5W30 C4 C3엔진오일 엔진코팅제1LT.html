@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C4 MSDS 웹페이지 (2제품 풀버전)</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --brand: #111827;
+      --accent: #0f766e;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+      color: var(--ink);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+      background: rgba(248, 250, 252, 0.88);
+      backdrop-filter: blur(10px);
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: #fff;
+      padding: 4px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    }
+
+    .brand-text { min-width: 0; }
+    .brand-text strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: #e2e8f0;
+      color: var(--ink);
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 20px 56px;
+    }
+
+    .product-shell + .product-shell {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 65%, #0f766e 100%);
+      color: #fff;
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+      margin-bottom: 24px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 24px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.2;
+      word-break: keep-all;
+    }
+
+    .hero p {
+      margin: 0;
+      color: rgba(255,255,255,0.88);
+      font-size: 15px;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .meta-card {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .meta-card dt {
+      font-size: 12px;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 6px;
+    }
+
+    .meta-card dd {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card .label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .summary-card .value {
+      font-size: 16px;
+      font-weight: 700;
+      word-break: keep-all;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 82px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .toc { padding: 18px; }
+
+    .toc h2,
+    .notice h2,
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .toc li + li { margin-top: 8px; }
+    .toc a {
+      color: var(--muted);
+      transition: 0.2s ease;
+    }
+    .toc a:hover { color: var(--ink); }
+
+    .notice {
+      padding: 18px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .notice p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .content {
+      display: grid;
+      gap: 18px;
+    }
+
+    .section { padding: 22px; }
+
+    .section h2 {
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .item { margin: 8px 0; }
+    .muted { color: var(--muted); }
+
+    .section ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+
+    .section li + li { margin-top: 6px; }
+
+    .info-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .info-row:last-child { border-bottom: 0; }
+
+    .info-row strong {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f8fafc;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .mini {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fcfdff;
+    }
+
+    .mini h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .layout,
+      .summary-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar { position: static; }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav { justify-content: flex-start; }
+
+      .hero,
+      .section,
+      .summary-card,
+      .toc,
+      .notice { padding: 18px; }
+
+      .meta { grid-template-columns: 1fr; }
+
+      .info-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img src="https://blogpfthumb-phinf.pstatic.net/20171229_1/monster-lubelab_1514521850974GP7tt_PNG/logotransp.png" alt="Monster Lube Lab Logo" />
+        <div class="brand-text">
+          <strong>몬스터루브랩 MSDS</strong>
+          <span>아이비스트 C4 하이브리드 5W30 / 제커 매직올인원 5W30 C4</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#product-1">아이비스트 C4</a>
+        <a href="#product-2">제커 C4</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <article class="product-shell" id="product-1">
+      <section class="hero" id="overview-1">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">물질보건안전자료 · MSDS</div>
+            <h1>아이비스트 C4 하이브리드 5W30</h1>
+            <p>가솔린 및 디젤 엔진용 윤활유 제품의 주요 안전정보, 구성성분, 응급조치, 물리화학적 특성 및 법적 규제 현황을 웹페이지 형태로 정리한 버전입니다.</p>
+          </div>
+          <dl class="meta">
+            <div class="meta-card">
+              <dt>MSDS 번호</dt>
+              <dd>MLL-MSDS-2026-005</dd>
+            </div>
+            <div class="meta-card">
+              <dt>개정번호</dt>
+              <dd>7</dd>
+            </div>
+            <div class="meta-card">
+              <dt>개정일자</dt>
+              <dd>2026. 03. 01.</dd>
+            </div>
+            <div class="meta-card">
+              <dt>제품 규격</dt>
+              <dd>ACEA C4 / Low SAPS</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="summary-grid" aria-label="아이비스트 C4 핵심 요약">
+        <article class="summary-card">
+          <span class="label">권고 용도</span>
+          <div class="value">가솔린 디젤 엔진오일</div>
+        </article>
+        <article class="summary-card">
+          <span class="label">유해·위험성 분류</span>
+          <div class="value">해당 없음</div>
+        </article>
+        <article class="summary-card">
+          <span class="label">NFPA 등급</span>
+          <div class="value">보건 1 · 화재 1 · 반응성 0</div>
+        </article>
+        <article class="summary-card">
+          <span class="label">인화점</span>
+          <div class="value">226 ℃ (Typical)</div>
+        </article>
+      </section>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <section class="card toc">
+            <h2>목차</h2>
+            <ol>
+              <li><a href="#company-1">화학제품과 회사 정보</a></li>
+              <li><a href="#hazard-1">유해·위험성</a></li>
+              <li><a href="#composition-1">구성성분</a></li>
+              <li><a href="#first-aid-1">응급조치</a></li>
+              <li><a href="#fire-1">화재 대처</a></li>
+              <li><a href="#spill-1">누출 대처</a></li>
+              <li><a href="#handling-1">취급 및 저장</a></li>
+              <li><a href="#ppe-1">노출방지 및 보호구</a></li>
+              <li><a href="#properties-1">물리화학적 특성</a></li>
+              <li><a href="#toxicity-1">독성 정보</a></li>
+              <li><a href="#environment-1">환경 영향</a></li>
+              <li><a href="#regulation-1">법적 규제현황</a></li>
+            </ol>
+          </section>
+
+          <section class="card notice">
+            <h2>안내</h2>
+            <p>아이비스트 C4 하이브리드 5W30 제품의 웹용 MSDS입니다.</p>
+          </section>
+        </aside>
+
+        <div class="content">
+          <section class="card section" id="company-1">
+            <h2>1. 화학제품과 회사에 관한 정보</h2>
+            <div class="info-list">
+              <div class="info-row"><strong>제품명</strong><div>아이비스트 C4 하이브리드 5W30</div></div>
+              <div class="info-row"><strong>권고 용도</strong><div>가솔린 디젤 엔진오일</div></div>
+              <div class="info-row"><strong>제조회사명</strong><div>주식회사 몬스터루브랩</div></div>
+              <div class="info-row"><strong>주소</strong><div>경북 고령군 성산면 지리골길 6</div></div>
+              <div class="info-row"><strong>긴급연락 전화번호</strong><div>054-956-0068</div></div>
+              <div class="info-row"><strong>공급자</strong><div>주식회사 몬스터루브랩 (제조원과 동일)</div></div>
+            </div>
+          </section>
+
+          <section class="card section" id="hazard-1">
+            <h2>2. 유해 · 위험성</h2>
+            <div class="item"><strong>유해 · 위험성 분류:</strong> 해당 없음</div>
+            <div class="item"><strong>신호어:</strong> 없음</div>
+            <div class="item"><strong>유해 · 위험 문구:</strong> 해당 없음</div>
+            <div class="item"><strong>예방/대응/저장 문구:</strong> 해당 없음</div>
+            <div class="item"><strong>폐기 문구:</strong> P501 - 폐기물관리법에 따라 내용물과 용기를 폐기하시오</div>
+            <div class="item"><strong>기타 유해 · 위험성:</strong> NFPA 등급 - 보건 1, 화재 1, 반응성 0</div>
+            <div class="item"><strong>제품 규격:</strong> ACEA C4 / Low SAPS</div>
+          </section>
+
+          <section class="card section" id="composition-1">
+            <h2>3. 구성성분의 명칭 및 함유량</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>화학물질명</th>
+                    <th>CAS 번호</th>
+                    <th>함유량(%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Hydrotreated base oil (Group III)</td><td>64742-54-7, 72623-87-1</td><td>65 ~ 80 %</td></tr>
+                  <tr><td>Olefin copolymer</td><td>9010-79-1</td><td>3 ~ 10 %</td></tr>
+                  <tr><td>DOW OSP-32 (UCON PAG)</td><td>9038-95-3</td><td>&lt; 5 %</td></tr>
+                  <tr><td>Calcium sulfonate / phenate</td><td>61789-86-4, 68784-26-9</td><td>1 ~ 3 %</td></tr>
+                  <tr><td>Zinc dialkyldithiophosphate</td><td>68649-42-3</td><td>0.5 ~ 1.5 %</td></tr>
+                  <tr><td>Molybdenum dithiocarbamate (MODTC)</td><td>68412-26-0</td><td>&lt; 0.5 %</td></tr>
+                  <tr><td>Dispersant</td><td>영업비밀</td><td>1 ~ 5 %</td></tr>
+                  <tr><td>Antioxidant</td><td>영업비밀</td><td>0.1 ~ 1.0 %</td></tr>
+                  <tr><td>Titanium compound</td><td>영업비밀</td><td>0.001 ~ 0.01 %</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card section" id="first-aid-1">
+            <h2>4. 응급조치 요령</h2>
+            <ul>
+              <li><strong>눈에 들어갔을 때:</strong> 즉시 20분 이상 흐르는 물에 피부와 눈을 씻어내고 긴급 의료조치를 받으시오.</li>
+              <li><strong>피부에 접촉했을 때:</strong> 흐르는 물에 20분 이상 씻고 오염된 옷과 신발을 제거·격리하시오. 피부 자극 시 의학적 조치를 구하시오.</li>
+              <li><strong>흡입했을 때:</strong> 신선한 공기가 있는 곳으로 옮기고, 호흡하지 않으면 인공호흡, 힘들면 산소를 공급하시오. 호흡기 증상 시 진찰을 받으시오.</li>
+              <li><strong>먹었을 때:</strong> 입을 씻어내고 즉시 의학적인 조치·조언을 받으시오. 의식이 없는 사람에게 입으로 아무것도 먹이지 마시오.</li>
+              <li><strong>기타 의사의 주의사항:</strong> 의료인력이 해당물질에 대해 인지하고 보호조치를 취하도록 하시오.</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="fire-1">
+            <h2>5. 폭발 · 화재시 대처방법</h2>
+            <ul>
+              <li><strong>적절한 소화제:</strong> 소형 화재 - 건조모래, 건조화학제, 내알콜포말, 물분무, 일반포말, CO2 / 대형 화재 - 물분무·안개, 일반포말</li>
+              <li><strong>부적절한 소화제:</strong> 고압주수</li>
+              <li>열, 스파크, 화염에 의해 점화할 수 있으며 자극성·독성 가스를 발생할 수 있음.</li>
+              <li>밀폐된 화재 장소 진입 시 산소마스크 등 호흡용 보호기구를 착용하고, 과열된 용기는 물로 식히시오.</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="spill-1">
+            <h2>6. 누출 사고 시 대처방법</h2>
+            <ul>
+              <li>적절한 보호 장비 없이 조치를 취하지 마시오.</li>
+              <li>모든 점화원을 제거하고 오염지역을 환기하시오.</li>
+              <li>수로, 하수구, 지하실, 밀폐공간 유입을 방지하시오.</li>
+              <li>소량 누출 시 모래 등 비가연성 물질로 흡수하고, 다량 누출 시 둔덕을 쌓아 폐기하시오.</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="handling-1">
+            <h2>7. 취급 및 저장방법</h2>
+            <ul>
+              <li>모든 안전 예방조치 문구를 읽고 이해하기 전에는 취급하지 마시오.</li>
+              <li>취급 후 철저히 씻고, 고온에 주의하시오.</li>
+              <li>누출 여부를 주기적으로 점검하고 손상된 용기는 사용하지 마시오.</li>
+              <li>용기에 물리적 충격이나 직접적인 열을 가하지 마시오.</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="ppe-1">
+            <h2>8. 노출방지 및 개인보호구</h2>
+            <div class="two-col">
+              <div class="mini">
+                <h3>노출 기준</h3>
+                <div>산업안전보건법 / OSHA / ACGIH / NIOSH 기준: TWA 5 mg/m³, STEL 10 mg/m³</div>
+              </div>
+              <div class="mini">
+                <h3>공학적 관리</h3>
+                <div>작업장 전체 환기 및 국소배기시설 설치, 공학적 관리 및 개인보호구 착용</div>
+              </div>
+            </div>
+            <ul>
+              <li>호흡기보호: 호흡용 보호구 착용</li>
+              <li>눈보호: 통기성 보안경 및 세안설비 설치</li>
+              <li>손보호: 적절한 재질의 보호장갑 및 화학물질용 안전장갑 착용</li>
+              <li>신체보호: 화학물질용 보호의복 착용</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="properties-1">
+            <h2>9. 물리화학적 특성</h2>
+            <div class="table-wrap">
+              <table>
+                <tbody>
+                  <tr><th>외관</th><td>호박색의 투명한 액체</td><th>증기압</th><td>자료 없음</td></tr>
+                  <tr><th>냄새</th><td>연한 미네랄 오일 냄새</td><th>용해도</th><td>물에 녹지 않음</td></tr>
+                  <tr><th>pH</th><td>해당 없음</td><th>비중 (15℃)</th><td>0.854 (Typical)</td></tr>
+                  <tr><th>유동점</th><td>-42 ℃ (Typical)</td><th>자연발화 온도</th><td>자료 없음</td></tr>
+                  <tr><th>인화점</th><td>226 ℃ (Typical)</td><th>점도 (100℃)</th><td>12.0 mm²/s (Typical)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card section">
+            <h2>10. 안정성 및 반응성</h2>
+            <div class="item">상온 상압 조건에서 안정함. 가열 시 용기가 폭발할 수 있으며, 점화원(열, 스파크, 화염)을 피하시오.</div>
+          </section>
+
+          <section class="card section" id="toxicity-1">
+            <h2>11. 독성에 관한 정보</h2>
+            <div class="item">본 제품은 유기 몰리브덴(MODTC) 기반 마찰저감 첨가제를 포함하며, 엔진 내부 마찰 감소 및 연비 향상에 기여함.</div>
+            <ul>
+              <li>경구 LD50 &gt; 15000 mg/kg (rat)</li>
+              <li>경피 LD50 &gt; 5000 mg/kg (rabbit)</li>
+              <li>피부 부식성 또는 자극성: 약한 자극성 (rabbit)</li>
+              <li>심한 눈 손상 또는 자극성: 자극성 (rabbit)</li>
+              <li>호흡기 과민성: 자료 없음</li>
+              <li>피부 과민성: 비과민성 (Guinea Pig)</li>
+              <li>발암성: 해당 없음</li>
+              <li>생식세포 변이원성 / 생식독성 / 특정 표적장기독성: 자료 없음</li>
+              <li>흡인유해성: 해당 없음</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="environment-1">
+            <h2>12. 환경에 미치는 영향</h2>
+            <ul>
+              <li>어류 LC50 &gt; 5000 mg/L, 96 hr, Oncorhynchus mykiss</li>
+              <li>갑각류 EC50 &gt; 1000 mg/L, 48 hr, Daphnia magna</li>
+              <li>조류 EC50 &gt; 1000 mg/L, 96 hr, Scenedesmus subspicatus</li>
+              <li>잔류성 log Kow 3.9 ~ 6 (추정치)</li>
+              <li>생분해성 6 (%) / 28 day / 쉽게 분해되지 않음</li>
+              <li>어류 NOEC (Pimephales promelas) &gt; 5000 mg/L / 7일</li>
+            </ul>
+          </section>
+
+          <section class="card section">
+            <h2>13. 폐기시 주의사항</h2>
+            <div class="item">폐기물관리법에 명시된 경우 규정에 따라 내용물 및 용기를 폐기하시오.</div>
+          </section>
+
+          <section class="card section">
+            <h2>14. 운송에 필요한 정보</h2>
+            <div class="item">UN 번호 / 적정 선적명 / 위험성 등급 / 용기등급 / 해양오염물질: 자료 없음</div>
+          </section>
+
+          <section class="card section" id="regulation-1">
+            <h2>15. 법적 규제현황</h2>
+            <ul>
+              <li>산업안전보건법: MSDS 작성대상 물질</li>
+              <li>화학물질관리법: 자료 없음</li>
+              <li>위험물안전관리법: 위험물 제4류 제4석유류</li>
+              <li>폐기물관리법: 지정폐기물</li>
+            </ul>
+          </section>
+
+          <section class="card section">
+            <h2>16. 기타 참고사항</h2>
+            <div class="info-list">
+              <div class="info-row"><strong>자료의 출처</strong><div>납품업체 자료, 한국산업안전공단, 고용노동부고시 제2020-130호</div></div>
+              <div class="info-row"><strong>최초작성일자</strong><div>2026년 03월 01일</div></div>
+              <div class="info-row"><strong>개정횟수</strong><div>7</div></div>
+              <div class="info-row"><strong>최종 개정일자</strong><div>2026. 03. 01.</div></div>
+            </div>
+            <p class="footer-note">이 자료는 당사가 갖고 있는 현재까지의 지식에 근거하여 작성된 것으로, 건강과 안전 환경 관련 정보를 제공하기 위한 것이며 제품의 특정 물성에 대한 보증 또는 Spec.을 의미하지 않습니다.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-shell" id="product-2">
+      <section class="hero" id="overview-2">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">물질보건안전자료 · MSDS</div>
+            <h1>제커 매직올인원 5W30 C4</h1>
+            <p>가솔린 및 디젤 엔진용 윤활유 제품의 주요 안전정보, 구성성분, 응급조치, 물리화학적 특성 및 법적 규제 현황을 웹페이지 형태로 정리한 버전입니다.</p>
+          </div>
+          <dl class="meta">
+            <div class="meta-card">
+              <dt>MSDS 번호</dt>
+              <dd>MLL-MSDS-2026-005</dd>
+            </div>
+            <div class="meta-card">
+              <dt>개정번호</dt>
+              <dd>7</dd>
+            </div>
+            <div class="meta-card">
+              <dt>개정일자</dt>
+              <dd>2026. 03. 01.</dd>
+            </div>
+            <div class="meta-card">
+              <dt>제품 규격</dt>
+              <dd>ACEA C4 / Low SAPS</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="summary-grid" aria-label="제커 C4 핵심 요약">
+        <article class="summary-card">
+          <span class="label">권고 용도</span>
+          <div class="value">가솔린 디젤 엔진오일</div>
+        </article>
+        <article class="summary-card">
+          <span class="label">유해·위험성 분류</span>
+          <div class="value">해당 없음</div>
+        </article>
+        <article class="summary-card">
+          <span class="label">NFPA 등급</span>
+          <div class="value">보건 1 · 화재 1 · 반응성 0</div>
+        </article>
+        <article class="summary-card">
+          <span class="label">인화점</span>
+          <div class="value">226 ℃ (Typical)</div>
+        </article>
+      </section>
+
+      <div class="layout">
+        <aside class="sidebar">
+          <section class="card toc">
+            <h2>목차</h2>
+            <ol>
+              <li><a href="#company-2">화학제품과 회사 정보</a></li>
+              <li><a href="#hazard-2">유해·위험성</a></li>
+              <li><a href="#composition-2">구성성분</a></li>
+              <li><a href="#first-aid-2">응급조치</a></li>
+              <li><a href="#fire-2">화재 대처</a></li>
+              <li><a href="#spill-2">누출 대처</a></li>
+              <li><a href="#handling-2">취급 및 저장</a></li>
+              <li><a href="#ppe-2">노출방지 및 보호구</a></li>
+              <li><a href="#properties-2">물리화학적 특성</a></li>
+              <li><a href="#toxicity-2">독성 정보</a></li>
+              <li><a href="#environment-2">환경 영향</a></li>
+              <li><a href="#regulation-2">법적 규제현황</a></li>
+            </ol>
+          </section>
+
+          <section class="card notice">
+            <h2>안내</h2>
+            <p>제커 매직올인원 5W30 C4 제품의 웹용 MSDS입니다.</p>
+          </section>
+        </aside>
+
+        <div class="content">
+          <section class="card section" id="company-2">
+            <h2>1. 화학제품과 회사에 관한 정보</h2>
+            <div class="info-list">
+              <div class="info-row"><strong>제품명</strong><div>제커 매직올인원 5W30 C4</div></div>
+              <div class="info-row"><strong>권고 용도</strong><div>가솔린 디젤 엔진오일</div></div>
+              <div class="info-row"><strong>제조회사명</strong><div>주식회사 몬스터루브랩</div></div>
+              <div class="info-row"><strong>주소</strong><div>경북 고령군 성산면 지리골길 6</div></div>
+              <div class="info-row"><strong>긴급연락 전화번호</strong><div>054-956-0068</div></div>
+              <div class="info-row"><strong>공급자</strong><div>주식회사 몬스터루브랩 (제조원과 동일)</div></div>
+            </div>
+          </section>
+
+          <section class="card section" id="hazard-2">
+            <h2>2. 유해 · 위험성</h2>
+            <div class="item"><strong>유해 · 위험성 분류:</strong> 해당 없음</div>
+            <div class="item"><strong>신호어:</strong> 없음</div>
+            <div class="item"><strong>유해 · 위험 문구:</strong> 해당 없음</div>
+            <div class="item"><strong>예방/대응/저장 문구:</strong> 해당 없음</div>
+            <div class="item"><strong>폐기 문구:</strong> P501 - 폐기물관리법에 따라 내용물과 용기를 폐기하시오</div>
+            <div class="item"><strong>기타 유해 · 위험성:</strong> NFPA 등급 - 보건 1, 화재 1, 반응성 0</div>
+            <div class="item"><strong>제품 규격:</strong> ACEA C4 / Low SAPS</div>
+          </section>
+
+          <section class="card section" id="composition-2">
+            <h2>3. 구성성분의 명칭 및 함유량</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>화학물질명</th>
+                    <th>CAS 번호</th>
+                    <th>함유량(%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Hydrotreated base oil (Group III)</td><td>64742-54-7, 72623-87-1</td><td>65 ~ 80 %</td></tr>
+                  <tr><td>Olefin copolymer</td><td>9010-79-1</td><td>3 ~ 10 %</td></tr>
+                  <tr><td>DOW OSP-32 (UCON PAG)</td><td>9038-95-3</td><td>&lt; 5 %</td></tr>
+                  <tr><td>Calcium sulfonate / phenate</td><td>61789-86-4, 68784-26-9</td><td>1 ~ 3 %</td></tr>
+                  <tr><td>Zinc dialkyldithiophosphate</td><td>68649-42-3</td><td>0.5 ~ 1.5 %</td></tr>
+                  <tr><td>Molybdenum dithiocarbamate (MODTC)</td><td>68412-26-0</td><td>&lt; 0.5 %</td></tr>
+                  <tr><td>Dispersant</td><td>영업비밀</td><td>1 ~ 5 %</td></tr>
+                  <tr><td>Antioxidant</td><td>영업비밀</td><td>0.1 ~ 1.0 %</td></tr>
+                  <tr><td>Titanium compound</td><td>영업비밀</td><td>0.001 ~ 0.01 %</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card section" id="first-aid-2">
+            <h2>4. 응급조치 요령</h2>
+            <ul>
+              <li><strong>눈에 들어갔을 때:</strong> 즉시 20분 이상 흐르는 물에 피부와 눈을 씻어내고 긴급 의료조치를 받으시오.</li>
+              <li><strong>피부에 접촉했을 때:</strong> 흐르는 물에 20분 이상 씻고 오염된 옷과 신발을 제거·격리하시오. 피부 자극 시 의학적 조치를 구하시오.</li>
+              <li><strong>흡입했을 때:</strong> 신선한 공기가 있는 곳으로 옮기고, 호흡하지 않으면 인공호흡, 힘들면 산소를 공급하시오. 호흡기 증상 시 진찰을 받으시오.</li>
+              <li><strong>먹었을 때:</strong> 입을 씻어내고 즉시 의학적인 조치·조언을 받으시오. 의식이 없는 사람에게 입으로 아무것도 먹이지 마시오.</li>
+              <li><strong>기타 의사의 주의사항:</strong> 의료인력이 해당물질에 대해 인지하고 보호조치를 취하도록 하시오.</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="fire-2">
+            <h2>5. 폭발 · 화재시 대처방법</h2>
+            <ul>
+              <li><strong>적절한 소화제:</strong> 소형 화재 - 건조모래, 건조화학제, 내알콜포말, 물분무, 일반포말, CO2 / 대형 화재 - 물분무·안개, 일반포말</li>
+              <li><strong>부적절한 소화제:</strong> 고압주수</li>
+              <li>열, 스파크, 화염에 의해 점화할 수 있으며 자극성·독성 가스를 발생할 수 있음.</li>
+              <li>밀폐된 화재 장소 진입 시 산소마스크 등 호흡용 보호기구를 착용하고, 과열된 용기는 물로 식히시오.</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="spill-2">
+            <h2>6. 누출 사고 시 대처방법</h2>
+            <ul>
+              <li>적절한 보호 장비 없이 조치를 취하지 마시오.</li>
+              <li>모든 점화원을 제거하고 오염지역을 환기하시오.</li>
+              <li>수로, 하수구, 지하실, 밀폐공간 유입을 방지하시오.</li>
+              <li>소량 누출 시 모래 등 비가연성 물질로 흡수하고, 다량 누출 시 둔덕을 쌓아 폐기하시오.</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="handling-2">
+            <h2>7. 취급 및 저장방법</h2>
+            <ul>
+              <li>모든 안전 예방조치 문구를 읽고 이해하기 전에는 취급하지 마시오.</li>
+              <li>취급 후 철저히 씻고, 고온에 주의하시오.</li>
+              <li>누출 여부를 주기적으로 점검하고 손상된 용기는 사용하지 마시오.</li>
+              <li>용기에 물리적 충격이나 직접적인 열을 가하지 마시오.</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="ppe-2">
+            <h2>8. 노출방지 및 개인보호구</h2>
+            <div class="two-col">
+              <div class="mini">
+                <h3>노출 기준</h3>
+                <div>산업안전보건법 / OSHA / ACGIH / NIOSH 기준: TWA 5 mg/m³, STEL 10 mg/m³</div>
+              </div>
+              <div class="mini">
+                <h3>공학적 관리</h3>
+                <div>작업장 전체 환기 및 국소배기시설 설치, 공학적 관리 및 개인보호구 착용</div>
+              </div>
+            </div>
+            <ul>
+              <li>호흡기보호: 호흡용 보호구 착용</li>
+              <li>눈보호: 통기성 보안경 및 세안설비 설치</li>
+              <li>손보호: 적절한 재질의 보호장갑 및 화학물질용 안전장갑 착용</li>
+              <li>신체보호: 화학물질용 보호의복 착용</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="properties-2">
+            <h2>9. 물리화학적 특성</h2>
+            <div class="table-wrap">
+              <table>
+                <tbody>
+                  <tr><th>외관</th><td>호박색의 투명한 액체</td><th>증기압</th><td>자료 없음</td></tr>
+                  <tr><th>냄새</th><td>연한 미네랄 오일 냄새</td><th>용해도</th><td>물에 녹지 않음</td></tr>
+                  <tr><th>pH</th><td>해당 없음</td><th>비중 (15℃)</th><td>0.854 (Typical)</td></tr>
+                  <tr><th>유동점</th><td>-42 ℃ (Typical)</td><th>자연발화 온도</th><td>자료 없음</td></tr>
+                  <tr><th>인화점</th><td>226 ℃ (Typical)</td><th>점도 (100℃)</th><td>12.0 mm²/s (Typical)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="card section">
+            <h2>10. 안정성 및 반응성</h2>
+            <div class="item">상온 상압 조건에서 안정함. 가열 시 용기가 폭발할 수 있으며, 점화원(열, 스파크, 화염)을 피하시오.</div>
+          </section>
+
+          <section class="card section" id="toxicity-2">
+            <h2>11. 독성에 관한 정보</h2>
+            <div class="item">본 제품은 유기 몰리브덴(MODTC) 기반 마찰저감 첨가제를 포함하며, 엔진 내부 마찰 감소 및 연비 향상에 기여함.</div>
+            <ul>
+              <li>경구 LD50 &gt; 15000 mg/kg (rat)</li>
+              <li>경피 LD50 &gt; 5000 mg/kg (rabbit)</li>
+              <li>피부 부식성 또는 자극성: 약한 자극성 (rabbit)</li>
+              <li>심한 눈 손상 또는 자극성: 자극성 (rabbit)</li>
+              <li>호흡기 과민성: 자료 없음</li>
+              <li>피부 과민성: 비과민성 (Guinea Pig)</li>
+              <li>발암성: 해당 없음</li>
+              <li>생식세포 변이원성 / 생식독성 / 특정 표적장기독성: 자료 없음</li>
+              <li>흡인유해성: 해당 없음</li>
+            </ul>
+          </section>
+
+          <section class="card section" id="environment-2">
+            <h2>12. 환경에 미치는 영향</h2>
+            <ul>
+              <li>어류 LC50 &gt; 5000 mg/L, 96 hr, Oncorhynchus mykiss</li>
+              <li>갑각류 EC50 &gt; 1000 mg/L, 48 hr, Daphnia magna</li>
+              <li>조류 EC50 &gt; 1000 mg/L, 96 hr, Scenedesmus subspicatus</li>
+              <li>잔류성 log Kow 3.9 ~ 6 (추정치)</li>
+              <li>생분해성 6 (%) / 28 day / 쉽게 분해되지 않음</li>
+              <li>어류 NOEC (Pimephales promelas) &gt; 5000 mg/L / 7일</li>
+            </ul>
+          </section>
+
+          <section class="card section">
+            <h2>13. 폐기시 주의사항</h2>
+            <div class="item">폐기물관리법에 명시된 경우 규정에 따라 내용물 및 용기를 폐기하시오.</div>
+          </section>
+
+          <section class="card section">
+            <h2>14. 운송에 필요한 정보</h2>
+            <div class="item">UN 번호 / 적정 선적명 / 위험성 등급 / 용기등급 / 해양오염물질: 자료 없음</div>
+          </section>
+
+          <section class="card section" id="regulation-2">
+            <h2>15. 법적 규제현황</h2>
+            <ul>
+              <li>산업안전보건법: MSDS 작성대상 물질</li>
+              <li>화학물질관리법: 자료 없음</li>
+              <li>위험물안전관리법: 위험물 제4류 제4석유류</li>
+              <li>폐기물관리법: 지정폐기물</li>
+            </ul>
+          </section>
+
+          <section class="card section">
+            <h2>16. 기타 참고사항</h2>
+            <div class="info-list">
+              <div class="info-row"><strong>자료의 출처</strong><div>납품업체 자료, 한국산업안전공단, 고용노동부고시 제2020-130호</div></div>
+              <div class="info-row"><strong>최초작성일자</strong><div>2026년 03월 01일</div></div>
+              <div class="info-row"><strong>개정횟수</strong><div>7</div></div>
+              <div class="info-row"><strong>최종 개정일자</strong><div>2026. 03. 01.</div></div>
+            </div>
+            <p class="footer-note">이 자료는 당사가 갖고 있는 현재까지의 지식에 근거하여 작성된 것으로, 건강과 안전 환경 관련 정보를 제공하기 위한 것이며 제품의 특정 물성에 대한 보증 또는 Spec.을 의미하지 않습니다.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
