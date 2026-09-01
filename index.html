@@ -60,8 +60,8 @@ body {
 }
 
 .logo {
-    height: 32px;
-    max-width: 145px;
+    height: 42px;
+    width: auto;
     display: block;
 }
 
@@ -514,16 +514,10 @@ body {
             아래 placeholder를 지우고
             img 코드를 사용하면 됩니다.
             -->
-
-            <div
-                class="logo-placeholder"
-                id="textLogo">
-
-                <span class="green">G</span>
-                <span class="blue">market</span>
-
-            </div>
-
+<img
+    class="logo"
+    src="{{ '/assets/gmarket-logo.png' | relative_url }}"
+    alt="Gmarket">
             <!--
             <img
                 class="logo"
