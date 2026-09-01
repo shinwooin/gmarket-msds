@@ -7,13 +7,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gmarket MSDS</title>
+<title>동탄센터 MSDS</title>
 
 <style>
-
-/* ==============================
-   기본 설정
-============================== */
 
 * {
     box-sizing: border-box;
@@ -21,6 +17,7 @@
 
 html {
     -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -38,7 +35,7 @@ body {
 
 
 /* ==============================
-   상단
+   HEADER
 ============================== */
 
 .header {
@@ -52,9 +49,6 @@ body {
     padding: 34px 20px 30px;
 }
 
-
-/* 로고 */
-
 .logo-area {
     margin-bottom: 30px;
 }
@@ -64,28 +58,6 @@ body {
     width: auto;
     display: block;
 }
-
-
-/* 로고가 아직 없을 때 표시 */
-
-.logo-placeholder {
-    display: inline-flex;
-    align-items: center;
-    font-size: 25px;
-    font-weight: 800;
-    letter-spacing: -1.2px;
-}
-
-.logo-placeholder .green {
-    color: #00C01E;
-}
-
-.logo-placeholder .blue {
-    color: #0028AC;
-}
-
-
-/* 제목 */
 
 .page-title {
     margin: 0;
@@ -104,7 +76,7 @@ body {
 
 
 /* ==============================
-   검색 영역
+   MAIN
 ============================== */
 
 .search-section {
@@ -112,6 +84,30 @@ body {
     margin: 0 auto;
     padding: 28px 20px 60px;
 }
+
+
+/* ==============================
+   검색창 상단 고정
+============================== */
+
+.sticky-search {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: rgba(246, 247, 249, 0.96);
+    backdrop-filter: blur(8px);
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    margin-top: -10px;
+}
+
+
+/* ==============================
+   검색창
+============================== */
 
 .search-box-wrap {
     position: relative;
@@ -130,11 +126,7 @@ body {
     width: 100%;
     height: 62px;
 
-    padding:
-        0
-        52px
-        0
-        53px;
+    padding: 0 52px 0 53px;
 
     border: 2px solid #00C01E;
     border-radius: 14px;
@@ -157,13 +149,11 @@ body {
 
 .search-box:focus {
     border-color: #00C01E;
+
     box-shadow:
         0 0 0 4px
         rgba(0, 192, 30, 0.10);
 }
-
-
-/* 검색어 삭제 버튼 */
 
 .clear-btn {
     position: absolute;
@@ -191,17 +181,18 @@ body {
 
 
 /* ==============================
-   검색 정보
+   검색 결과 / 전체보기
 ============================== */
 
 .summary {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 
-    margin: 17px 2px 20px;
+    margin: 10px 2px 4px;
 
-    min-height: 25px;
+    min-height: 38px;
 }
 
 .result-info {
@@ -212,6 +203,29 @@ body {
 .count-number {
     color: #00A91A;
     font-weight: 700;
+}
+
+.view-all-btn {
+    flex-shrink: 0;
+
+    border: 1px solid #d9dcdf;
+    background: #ffffff;
+
+    color: #45494e;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.view-all-btn:hover {
+    border-color: #00C01E;
+    color: #00A91A;
 }
 
 
@@ -228,6 +242,8 @@ body {
     padding: 55px 24px;
 
     text-align: center;
+
+    margin-top: 16px;
 }
 
 .guide-icon {
@@ -251,6 +267,7 @@ body {
     margin-bottom: 8px;
 
     color: #25282c;
+
     font-size: 17px;
     font-weight: 700;
 }
@@ -259,23 +276,22 @@ body {
     margin: 0;
 
     color: #858a90;
+
     font-size: 14px;
     line-height: 1.6;
 }
 
 
 /* ==============================
-   MSDS 검색 결과
+   검색 결과
 ============================== */
 
 .msds-list {
-    display: block;
+    margin-top: 16px;
 }
 
 .msds-item {
     display: none;
-
-    position: relative;
 
     background: #ffffff;
 
@@ -302,9 +318,6 @@ body {
     transform: translateY(-1px);
 }
 
-
-/* PDF 표시 */
-
 .type-badge {
     display: inline-flex;
 
@@ -322,9 +335,6 @@ body {
     font-weight: 700;
 }
 
-
-/* 제품명 */
-
 .msds-title {
     margin-bottom: 7px;
 
@@ -337,9 +347,6 @@ body {
     word-break: keep-all;
 }
 
-
-/* 업체/폴더 */
-
 .folder {
     margin-bottom: 17px;
 
@@ -351,7 +358,23 @@ body {
 }
 
 
-/* 열람 버튼 */
+/* 검색어 강조 */
+
+mark {
+    background: #ddf8e2;
+    color: #008b16;
+
+    font-weight: 800;
+
+    padding: 0 2px;
+
+    border-radius: 3px;
+}
+
+
+/* ==============================
+   버튼
+============================== */
 
 .open-btn {
     width: 100%;
@@ -386,7 +409,7 @@ body {
 
 
 /* ==============================
-   검색 결과 없음
+   결과 없음
 ============================== */
 
 .no-result {
@@ -398,6 +421,8 @@ body {
     border-radius: 16px;
 
     padding: 55px 20px;
+
+    margin-top: 16px;
 
     text-align: center;
 }
@@ -423,7 +448,7 @@ body {
 
 
 /* ==============================
-   하단 안내
+   하단
 ============================== */
 
 .footer-notice {
@@ -447,10 +472,11 @@ body {
 @media (max-width: 600px) {
 
     .header-inner {
-        padding:
-            26px
-            18px
-            25px;
+        padding: 26px 18px 25px;
+    }
+
+    .logo {
+        height: 36px;
     }
 
     .logo-area {
@@ -466,10 +492,7 @@ body {
     }
 
     .search-section {
-        padding:
-            22px
-            14px
-            45px;
+        padding: 22px 14px 45px;
     }
 
     .search-box {
@@ -477,19 +500,17 @@ body {
         font-size: 16px;
     }
 
+    .summary {
+        align-items: center;
+    }
+
     .guide {
-        padding:
-            45px
-            20px;
+        padding: 45px 20px;
     }
 
     .msds-item {
-        padding:
-            19px
-            18px
-            17px;
+        padding: 19px 18px 17px;
     }
-
 }
 
 </style>
@@ -499,9 +520,7 @@ body {
 <body>
 
 
-<!-- ==============================
-     HEADER
-================================ -->
+<!-- HEADER -->
 
 <div class="header">
 
@@ -509,21 +528,10 @@ body {
 
         <div class="logo-area">
 
-            <!--
-            공식 Gmarket 로고를 업로드한 후에는
-            아래 placeholder를 지우고
-            img 코드를 사용하면 됩니다.
-            -->
-<img
-    class="logo"
-    src="./gmarket-logo.png"
-    alt="Gmarket">
-            <!--
             <img
                 class="logo"
-                src="{{ '/assets/gmarket-logo.svg' | relative_url }}"
+                src="./gmarket-logo.png"
                 alt="Gmarket">
-            -->
 
         </div>
 
@@ -543,12 +551,13 @@ body {
 </div>
 
 
-<!-- ==============================
-     SEARCH
-================================ -->
 
 <main class="search-section">
 
+
+<!-- 검색창 고정 영역 -->
+
+<div class="sticky-search">
 
     <div class="search-box-wrap">
 
@@ -581,45 +590,60 @@ body {
             id="resultInfo">
         </div>
 
-    </div>
+        <button
+            id="viewAllBtn"
+            class="view-all-btn"
+            type="button">
 
+            전체 MSDS 보기
 
-    <!-- 검색 전 안내 -->
-
-    <div
-        class="guide"
-        id="guide">
-
-        <div class="guide-icon">
-            🔎
-        </div>
-
-        <div class="guide-title">
-            찾으시는 제품명을 검색해 주세요.
-        </div>
-
-        <p class="guide-description">
-            제품명 또는 브랜드명의 일부만 입력해도<br>
-            관련 MSDS를 확인할 수 있습니다.
-        </p>
+        </button>
 
     </div>
 
+</div>
 
 
-    <!-- ==============================
-         JEKYLL 자동 파일 목록
-    ================================ -->
 
-    <div class="msds-list">
+<!-- 검색 전 -->
+
+<div
+    class="guide"
+    id="guide">
+
+    <div class="guide-icon">
+        🔎
+    </div>
+
+    <div class="guide-title">
+        찾으시는 제품명을 검색해 주세요.
+    </div>
+
+    <p class="guide-description">
+        여러 단어를 띄어쓰기로 입력하면<br>
+        더 정확하게 검색할 수 있습니다.
+    </p>
+
+</div>
+
+
+
+<!-- MSDS 자동 생성 -->
+
+<div class="msds-list">
+
 
 {% assign msds_files = site.static_files | sort: "path" %}
 
+
 {% for file in msds_files %}
+
 
 {% if file.path contains '/msds/' %}
 
+
 {% assign ext = file.extname | downcase %}
+
 
 {% if ext == '.pdf'
    or ext == '.xlsx'
@@ -652,12 +676,18 @@ body {
 %}
 
 
+
 <div
     class="msds-item"
+
     data-search="
         {{ file.basename | escape }}
         {{ file.path | escape }}
-    ">
+    "
+
+    data-title="{{ display_name | escape }}"
+
+    data-folder="{{ parent_name | escape }}">
 
 
     <div class="type-badge">
@@ -689,8 +719,11 @@ body {
 
     <a
         class="open-btn"
+
         href="{{ file.path | relative_url }}"
+
         target="_blank"
+
         rel="noopener">
 
         MSDS 열람하기
@@ -707,45 +740,50 @@ body {
 
 {% endif %}
 
+
 {% endif %}
+
 
 {% endfor %}
 
+
+</div>
+
+
+
+<!-- 결과 없음 -->
+
+<div
+    class="no-result"
+    id="noResult">
+
+    <div class="no-result-icon">
+        🔎
     </div>
 
-
-
-    <!-- 검색 결과 없음 -->
-
-    <div
-        class="no-result"
-        id="noResult">
-
-        <div class="no-result-icon">
-            🔎
-        </div>
-
-        <div class="no-result-title">
-            검색 결과가 없습니다.
-        </div>
-
-        <div class="no-result-text">
-            제품명 또는 브랜드명을 다시 확인해 주세요.
-        </div>
-
+    <div class="no-result-title">
+        검색 결과가 없습니다.
     </div>
 
-
-
-    <div class="footer-notice">
-
-        제품명 또는 브랜드명으로
-        물질안전보건자료를 검색할 수 있습니다.
-        <br>
-        자료가 확인되지 않는 경우
-        안전관리 담당자에게 문의해 주세요.
-
+    <div class="no-result-text">
+        제품명 또는 브랜드명을 다시 확인해 주세요.
     </div>
+
+</div>
+
+
+
+<div class="footer-notice">
+
+    제품명 또는 브랜드명으로
+    물질안전보건자료를 검색할 수 있습니다.
+
+    <br>
+
+    자료가 확인되지 않는 경우
+    안전관리 담당자에게 문의해 주세요.
+
+</div>
 
 
 </main>
@@ -754,15 +792,18 @@ body {
 
 <script>
 
-/* ==================================
-   검색 기능
-================================== */
 
 const searchInput =
     document.getElementById("searchInput");
 
+
 const clearBtn =
     document.getElementById("clearBtn");
+
+
+const viewAllBtn =
+    document.getElementById("viewAllBtn");
+
 
 const items =
     Array.from(
@@ -771,18 +812,26 @@ const items =
         )
     );
 
+
 const resultInfo =
     document.getElementById("resultInfo");
 
+
 const guide =
     document.getElementById("guide");
+
 
 const noResult =
     document.getElementById("noResult");
 
 
+let showAll = false;
 
-/* 검색어 정리 */
+
+
+/* ==============================
+   문자열 정리
+============================== */
 
 function normalize(text) {
 
@@ -798,48 +847,203 @@ function normalize(text) {
 
 
 
-/* 검색 */
+/* ==============================
+   HTML 특수문자 처리
+============================== */
+
+function escapeHtml(text) {
+
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+/* ==============================
+   검색어 강조
+============================== */
+
+function highlightText(text, words) {
+
+    let result =
+        escapeHtml(text);
+
+
+    words.forEach(word => {
+
+        if (!word) {
+            return;
+        }
+
+
+        const escapedWord =
+            word.replace(
+                /[.*+?^${}()|[\]\\]/g,
+                "\\$&"
+            );
+
+
+        const regex =
+            new RegExp(
+                "(" + escapedWord + ")",
+                "gi"
+            );
+
+
+        result =
+            result.replace(
+                regex,
+                "<mark>$1</mark>"
+            );
+
+    });
+
+
+    return result;
+
+}
+
+
+
+/* ==============================
+   원래 제목 복원
+============================== */
+
+function restoreItemText(item) {
+
+    const title =
+        item.querySelector(
+            ".msds-title"
+        );
+
+
+    const folder =
+        item.querySelector(
+            ".folder"
+        );
+
+
+    if (title) {
+
+        title.textContent =
+            item.dataset.title;
+
+    }
+
+
+    if (folder) {
+
+        folder.textContent =
+            item.dataset.folder;
+
+    }
+
+}
+
+
+
+/* ==============================
+   검색
+============================== */
 
 function searchMSDS() {
+
 
     const rawKeyword =
         searchInput.value.trim();
 
-    const keyword =
-        normalize(rawKeyword);
+
+    /*
+    띄어쓰기 기준으로 단어 분리
+
+    예:
+    불스원 엔진오일
+    →
+    ["불스원", "엔진오일"]
+    */
+
+    const words =
+        rawKeyword
+            .split(/\s+/)
+            .filter(Boolean);
 
 
-    /* 검색어 없음 */
-
-    if (!keyword) {
-
-        items.forEach(
-            item => {
-                item.style.display =
-                    "none";
-            }
+    const normalizedWords =
+        words.map(
+            word => normalize(word)
         );
 
 
-        guide.style.display =
-            "block";
 
-        noResult.style.display =
-            "none";
+    /*
+    검색어가 없을 때
+    */
+
+    if (words.length === 0) {
+
 
         clearBtn.style.display =
             "none";
 
 
-        resultInfo.innerHTML =
+        noResult.style.display =
+            "none";
 
-            '등록된 MSDS ' +
 
-            '<span class="count-number">' +
+        items.forEach(item => {
 
-            items.length +
+            restoreItemText(item);
 
-            '</span>건';
+
+            item.style.display =
+                showAll
+                ? "block"
+                : "none";
+
+        });
+
+
+
+        if (showAll) {
+
+            guide.style.display =
+                "none";
+
+
+            resultInfo.innerHTML =
+
+                '전체 MSDS ' +
+
+                '<span class="count-number">' +
+
+                items.length +
+
+                '</span>건';
+
+
+        } else {
+
+
+            guide.style.display =
+                "block";
+
+
+            resultInfo.innerHTML =
+
+                '등록된 MSDS ' +
+
+                '<span class="count-number">' +
+
+                items.length +
+
+                '</span>건';
+
+        }
 
 
         return;
@@ -848,10 +1052,20 @@ function searchMSDS() {
 
 
 
-    /* 검색 시작 */
+    /*
+    검색 시작하면 전체보기 해제
+    */
+
+    showAll = false;
+
+
+    viewAllBtn.textContent =
+        "전체 MSDS 보기";
+
 
     guide.style.display =
         "none";
+
 
     clearBtn.style.display =
         "block";
@@ -860,7 +1074,12 @@ function searchMSDS() {
     let count = 0;
 
 
+
     items.forEach(item => {
+
+
+        restoreItemText(item);
+
 
         const searchText =
             normalize(
@@ -868,18 +1087,79 @@ function searchMSDS() {
             );
 
 
-        if (
-            searchText.includes(
-                keyword
-            )
-        ) {
+        /*
+        모든 검색어가 포함되어야 함
+
+        불스원 엔진오일
+        →
+        불스원 O
+        엔진오일 O
+
+        둘 다 있어야 표시
+        */
+
+        const matched =
+            normalizedWords.every(
+                word =>
+                    searchText.includes(
+                        word
+                    )
+            );
+
+
+
+        if (matched) {
+
 
             item.style.display =
                 "block";
 
+
             count++;
 
+
+
+            /*
+            검색어 강조
+            */
+
+
+            const title =
+                item.querySelector(
+                    ".msds-title"
+                );
+
+
+            const folder =
+                item.querySelector(
+                    ".folder"
+                );
+
+
+            if (title) {
+
+                title.innerHTML =
+                    highlightText(
+                        item.dataset.title,
+                        words
+                    );
+
+            }
+
+
+            if (folder) {
+
+                folder.innerHTML =
+                    highlightText(
+                        item.dataset.folder,
+                        words
+                    );
+
+            }
+
+
         } else {
+
 
             item.style.display =
                 "none";
@@ -902,42 +1182,121 @@ function searchMSDS() {
 
 
 
-    if (count === 0) {
+    noResult.style.display =
 
-        noResult.style.display =
-            "block";
-
-    } else {
-
-        noResult.style.display =
-            "none";
-
-    }
+        count === 0
+        ? "block"
+        : "none";
 
 }
 
 
 
-/* 입력할 때 검색 */
+/* ==============================
+   전체 MSDS 보기
+============================== */
 
-searchInput.addEventListener(
-    "input",
-    searchMSDS
+viewAllBtn.addEventListener(
+    "click",
+    function() {
+
+
+        showAll =
+            !showAll;
+
+
+        searchInput.value =
+            "";
+
+
+        clearBtn.style.display =
+            "none";
+
+
+        noResult.style.display =
+            "none";
+
+
+        if (showAll) {
+
+
+            viewAllBtn.textContent =
+                "전체 MSDS 접기";
+
+
+        } else {
+
+
+            viewAllBtn.textContent =
+                "전체 MSDS 보기";
+
+        }
+
+
+        searchMSDS();
+
+
+    }
 );
 
 
 
-/* X 버튼 */
+/* ==============================
+   검색 입력
+============================== */
+
+searchInput.addEventListener(
+    "input",
+    function() {
+
+
+        if (
+            searchInput.value.trim()
+            !== ""
+        ) {
+
+            showAll = false;
+
+            viewAllBtn.textContent =
+                "전체 MSDS 보기";
+
+        }
+
+
+        searchMSDS();
+
+
+    }
+);
+
+
+
+/* ==============================
+   X 버튼
+============================== */
 
 clearBtn.addEventListener(
     "click",
     function() {
 
-        searchInput.value = "";
+
+        searchInput.value =
+            "";
+
+
+        showAll =
+            false;
+
+
+        viewAllBtn.textContent =
+            "전체 MSDS 보기";
+
 
         searchMSDS();
 
+
         searchInput.focus();
+
 
     }
 );
@@ -947,6 +1306,7 @@ clearBtn.addEventListener(
 /* 최초 실행 */
 
 searchMSDS();
+
 
 </script>
 
